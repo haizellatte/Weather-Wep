@@ -5,47 +5,87 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap');
 
 *{
-  margin: 20px;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.body {
-  background-color: f5f5f5;
+body {
+  height: 100vh;
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,0.6489189425770308) 0%, rgba(246,173,50,0.5984987745098039) 97%, rgba(253,172,45,0.7077424719887955) 100%);
 }
 .App {
   text-align: center;
   justify-content: center;
   align-items: center;
+  border-radius: 80px;
+  padding: 10px 15px 30px;
+  margin: 10px;
 }
 .day {
   font-family: 'Rajdhani', sans-serif;
   font-size: 20px;
   margin-left:410px;
-  margin-bottom: -22px;
+  margin-top: 50px;
+  margin-bottom: -5px;
 }
 h2 {
   font-family: 'Michroma', sans-serif;
   font-size: 50px;
+  margin-bottom: 10px;
 }
 input {
-  width: 200px;
+  width: 150px;
   padding: 20px 10px 10px;
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #999;
   font-size: 20px; color: rgb(20, 19, 19);
   outline: none;
+  margin-bottom: 10px;
+  text-align: center;
+  margin : auto;
+  /* position: relative; */
 }
+
+input > .maininputChang ::before {
+  position: absolute;
+  top : 50%;
+  left: 50%;
+}
+
+input > .maininputChang ::after {
+  /* position: absolute; */
+  top : -50%;
+  left: -50%;
+  transform: translateY(-50%);
+}
+
+/* .maininputChang{
+  animation: slide .5s ease-out;
+  animation-iteration-count: 1;
+}
+@keyframes slide {
+  from {
+    margin-top : 500px;
+  } to {
+    margin-top : 0px;
+  }
+} */
+
 .sky {
   font-family: 'Source Code Pro', monospace;
   font-size: 60px;
   margin-top: 50px;
 }
 .answer_form{
-  border: 3px solid #eaeae5 ;
+  border: 3px solid #eaeae543 ;
+  background-color :rgba(255, 255, 255, 0.116);
   border-radius: 20%;
   margin-top: 50px;
+  margin-left: 100px;
   height: 800px;
+  width: 85%;
 }
 .temperature{
   font-family: 'Prompt', sans-serif;
@@ -57,35 +97,38 @@ input {
   margin-left: 50px;
 }
 .temperature_max_min {
-  font-family: 'Prompt', sans-serif; 
+  font-family: 'Prompt', sans-serif;
+  /* font-weight: bold;  */
   font-size: 30px;
-  margin-top: -10px;
-  margin-bottom: -40px;
+  margin-top: -20px;
+  margin-bottom: -20px;
   margin-left: -20px;
 }
 ._min {
-  color :rgb(29, 54, 177)
+  color :rgb(29, 54, 177);
+  margin-right : 30px;
 }
 ._max{
-  color :rgb(215, 74, 22)
+  color :rgb(215, 74, 22);
+  margin-left: 30px;
 }
 .v-line{
   border-left: 1px solid rgb(182, 182, 182);
   height: 10px;
 }
 .line {
-  border-bottom: 1px solid rgb(182, 182, 182);
+  border-bottom: 1px solid rgb(194, 188, 188);
   width: 130px;
   position: absolute;
   margin-left: -80px;
   margin-top: 160px;
 }
-.city {
+.cityName {
   font-family: 'Montserrat', sans-serif;
   font-size: 45px;
   color : rgb(92, 92, 92);
   margin-top: 180px;
-  margin-left: 10px;
+  margin-left: -30px;
 }
 .country {
   font-family: 'Montserrat', sans-serif;

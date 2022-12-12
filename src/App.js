@@ -4,20 +4,23 @@ import './App.css';
 
 function App() {
   const [location, setLocation] = useState('');
-  const [result, setResult] = useState({});
+  const [city, setCity] = useState({});
   const API_key = `7b529bbd02138dd0ed83445de338a6d5`; 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_key}`
   const today = new Date().toLocaleDateString()
   let day = new Date();
   const weekDay = ['SUN', 'MON','TUE', 'WED','THU','FRI', 'SAT'];
   let Week = weekDay[day.getDay()];
-
+  // const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`
+  // const [icon, setIcon] = useState({});
 
   //!event handler
   const onChangeLocation = (e) => {
     setLocation(e.target.value);
   }
-  //인풋창에 도시를 입력하고 엔터 -> Weather API 호출(비동기적으로)
+
+
+  //*인풋창에 도시를 입력하고 엔터 -> Weather API 호출(비동기적으로)
   const searchWeather = async(e) => {
     if(e.key === 'Enter'){
       try {
@@ -27,49 +30,91 @@ function App() {
           url: url
         })
         console.log(data);
-        setResult(data);
+        setCity(data);
+        console.log(setCity)
+        // console.log(data.data.weather[0].icon) //--> 04d
+        // setIcon(data.data.weather[0].icon)
       }
       catch (err){
         alert('Please check the city name again');
       }
     }
   }
+  //console.log(setIcon)
+
+//*input창을 click하면 입력값 초기화
+const resetValue = () => {
+  setLocation('')
+}
 
 
+// _getWeather = (location) => {
+//   fetch(
+//     `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_key}`
+//   )
+//   .then(res => res.json())
+//   .then(json => {
+//     this.Icon({
+//       icon : json.weather[0].icon
+//     })
+//   })
+// }
+
+
+/* 날씨 아이콘 가져오기
+1. 변수 condition 선언
+2. 변수 reference 에 `http://openweathermap.org/img/wn/${condition}@2x.png`담아줌
+3. city바뀔때마다 `city.data.weather[0].icon`값을 condition으로 할당하면 되지 않을까?
+*/
+
+//const onChangeIcon = (e) => {
+//  setCondition(e.target.value)
+//}
+
+// const getWeatherIcon = async(e) => {
+//   if(e)
+// }
 
   return (
+  <div className='base'>
     <div className="App">
-      <div className='day'>{today} {Week}</div>
-      <h2>Today's weather</h2>
-      <input 
-      type = 'text'
-      placeholder='        Which City'
-      value={location}
-      onChange={onChangeLocation}
-      onKeyDown={searchWeather}
-      />
-      {Object.keys(result).length !== 0 && (
+      <div className='maininputChang'>
+        <div className='day'>{today} {Week}</div>
+        <h2>Today's weather</h2>
+        <input 
+        type = 'text'
+        placeholder='Which City'
+        value={location}
+        onChange={onChangeLocation}
+        onKeyDown={searchWeather}
+        onClick={resetValue}
+        />
+      </div>
+      {Object.keys(city).length !== 0 && (
         <div className='answer_form'>
+        {/* <div className='weatherIcon'
+        >{iconUrl}</div> */}
         <div className='sky'>
-          {result.data.weather[0].description}
+          {city.data.weather[0].description}
         </div>
         <div className='temperature'>
-          { Math.round(((result.data.main.temp - 273.15) * 10)) / 10}°c
+          { Math.round(((city.data.main.temp - 273.15) * 10)) / 10}°c
         </div>
         <div className='temperature_max_min'>
           <span className='_min'>
-             { Math.round(((result.data.main.temp_min - 273.15) * 10)) / 10}°
+             { Math.round(((city.data.main.temp_min - 273.15) * 10)) / 10}°
           </span>
           <span className='v-line' />
           <span className='_max'>
-             { Math.round(((result.data.main.temp_max - 273.15) * 10)) / 10}°
+             { Math.round(((city.data.main.temp_max - 273.15) * 10)) / 10}°
           </span>
         </div>
         <span className='line'/>
-        <div className='city'>{result.data.name}<span className='country'>. {result.data.sys.country}</span></div>
+        <div className='cityName'>{city.data.name}<span className='country'>. {city.data.sys.country}</span></div>
       </div>
       )}
     </div>
+  </div>
   );
 }
 
